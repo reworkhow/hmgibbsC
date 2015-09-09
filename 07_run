@@ -1,0 +1,21 @@
+
+. ./00_config
+
+# Burn in the sampler
+BURNIN=2000
+
+# Total of 12k samples but only 10k are used after the BURNIN
+SAMPLES=12000
+
+cd ${RUN}
+
+# Uncomment these to use shared memory.
+#cln
+#shmgr load W1tW1.phi11
+#shmgr loadcmo M_2
+
+SEED=9876
+
+#export CUDA_VISIBLE_DEVICES=0
+
+hmgibbsC -A ${SCRIPTS}/mthmMap -o out -s ${SEED} -n ${SAMPLES} -B ${BURNIN} -p ${PI} -V -d 1
